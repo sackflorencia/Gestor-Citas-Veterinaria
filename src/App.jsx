@@ -43,8 +43,17 @@ function App() {
         </div>
         <Modal
           visible={citaAEliminar !== null}
-          onConfirmar={confirmarEliminar}
-          onCancelar={cancelarEliminar}
+          message="Estas seguro que querés eliminar la cita?"
+          actions={[
+            {
+              label: "Sí, eliminar",
+              onClick: confirmarEliminar
+            },
+            {
+              label: "Cancelar",
+              onClick: cancelarEliminar
+            }
+          ]}
         />
       </div>
     </>

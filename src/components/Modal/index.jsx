@@ -1,19 +1,18 @@
-import './Modal.css'
-const Modal = ({ visible, onConfirmar, onCancelar }) => {
+import './Modal.css';
+
+const Modal = ({ visible, message, actions }) => {
   if (!visible) return null;
 
   return (
     <div className="modal-overlay">
       <div className="modal">
-        <p>¿Seguro que querés eliminar esta cita?</p>
+        <p>{message}</p>
 
-        <button onClick={onConfirmar}>
-          Sí, eliminar
-        </button>
-
-        <button onClick={onCancelar}>
-          Cancelar
-        </button>
+        {actions.map((action, index) => (
+          <button key={index} onClick={action.onClick}>
+            {action.label}
+          </button>
+        ))}
       </div>
     </div>
   );
