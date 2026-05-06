@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Formulario from './components/Formulario'
 import Listado from './components/Listado'
@@ -6,11 +6,16 @@ import Titulo from './components/Titulo'
 import Modal from './components/Modal';
 
 function App() {
-  const [listaCitas, setListaCitas] = useState([]);
+  const citasGuardadas = localStorage.getItem('citas') ? 
+     JSON.parse(localStorage.getItem('citas')) : [] 
+  const [listaCitas, setListaCitas] = useState(citasGuardadas);
   const [citaAEliminar, setCitaAEliminar] = useState(null);
   const agregarCita = (cita) => {
     setListaCitas([...listaCitas, cita])
   };
+  useEffect(()=>{
+    localStorage.setItem('citas', JSON.stringify(listaCitas)), [listaCitas]
+  });
   const pedirEliminar = (cita) => {
     setCitaAEliminar(cita);
   };
